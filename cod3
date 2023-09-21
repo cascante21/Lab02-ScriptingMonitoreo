@@ -1,0 +1,6 @@
+directorio="/home/“
+archivo_log="/home/cambios.log"
+inotifywait -m -e create,modify,delete "$directorio" |
+    while read -r directory event file; do
+        echo "[$(date)] Evento detectado: $event en $directory$file" >> "$archivo_log"
+    done
