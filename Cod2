@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+    echo "Uso: $0 <nombre_del_proceso> <comando_para_ejecutar>"
+    exit 1
+fi
+
+nombre_proceso=$1
+comando=$2
+
+while true; do
+    if ! pgrep -x "$nombre_proceso" >/dev/null; then
+        echo "El proceso '$nombre_proceso' no está en ejecución. Iniciando..."
+        $comando &
+    fi
+    sleep 5  # Ajusta el intervalo de comprobación según tus necesidades
+done
